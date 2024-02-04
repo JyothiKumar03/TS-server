@@ -63,6 +63,7 @@ io.on("connection", (socket:Socket) => {
 app.post("/intent", async (req: Request, res: Response) => {
   console.log("request got ->",req.body)
   const { data } =  req.body as any;
+
   if (data) {
     //console.log("data ->",data)
     // data.message = data;
@@ -74,8 +75,9 @@ app.post("/intent", async (req: Request, res: Response) => {
   } else {
     res.status(400).json({ error: "Invalid message parameter" });
   }
+  res.status(200).json({data:`data not received`});
 });
 
-server.listen(port,() => {
+server.listen(port,'0.0.0.0' as any,() => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
